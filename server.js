@@ -3,7 +3,9 @@
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
+const morgan      = require('morgan');
 require('dotenv').config();
+require('./db-connection.js');
 
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
@@ -15,6 +17,7 @@ app.use('/public', express.static(process.cwd() + '/public'));
 
 app.use(cors({origin: '*'})); //USED FOR FCC TESTING PURPOSES ONLY!
 
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
